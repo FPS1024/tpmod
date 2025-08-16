@@ -12,30 +12,13 @@
 
 ---
 
-## 目录结构
 
-```
-.
-├── .gitignore
-├── LICENSE
-├── README.md
-├── build.gradle
-├── build.sh
-├── gradle.properties
-├── gradle/
-├── gradlew
-├── gradlew.bat
-├── settings.gradle
-└── src/
-    └── main/
-        └── (Java 源代码与资源文件)
-```
 
 ---
 
 ## 主要功能
 
-- 支持 `/tp`、自定义传送命令
+- 支持 `/tpm`、自定义传送命令
 - 跨世界传送，适配多种服务端
 - 完善的权限系统，支持与主流权限插件集成
 - 兼容多版本 Minecraft
@@ -70,11 +53,7 @@
 
 ---
 
-## 效果展示
 
-> 建议上传 mod 功能截图或演示 GIF，提升项目吸引力。
-
----
 
 ## 贡献指南
 
