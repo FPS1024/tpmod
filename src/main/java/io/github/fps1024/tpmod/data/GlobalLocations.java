@@ -2,10 +2,8 @@ package io.github.fps1024.tpmod.data;
 
 import io.github.fps1024.tpmod.TPMod;
 import io.github.fps1024.tpmod.util.Constants;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.DimensionDataStorage;
@@ -37,11 +35,10 @@ public final class GlobalLocations extends SavedData {
     /**
      * 从NBT数据加载全局传送点。
      *
-     * @param tag      存档NBT
-     * @param provider 数据修复器
+     * @param tag 存档NBT
      * @return 加载后的GlobalLocations对象
      */
-    public static GlobalLocations load(CompoundTag tag, HolderLookup.Provider provider) {
+    public static GlobalLocations load(CompoundTag tag) {
         GlobalLocations savedData = new GlobalLocations();
         CompoundTag locationsTag = tag.getCompound(Constants.NBT_KEY_LOCATIONS);
 
@@ -57,11 +54,10 @@ public final class GlobalLocations extends SavedData {
      * 将全局传送点保存为NBT。
      *
      * @param compoundTag 目标NBT
-     * @param provider    数据修复器
      * @return 保存后的NBT
      */
     @Override
-    public CompoundTag save(CompoundTag compoundTag, HolderLookup.Provider provider) {
+    public CompoundTag save(CompoundTag compoundTag) {
         CompoundTag locationsTag = new CompoundTag();
         locations.forEach((name, loc) -> locationsTag.put(name, loc.toNBT()));
         compoundTag.put(Constants.NBT_KEY_LOCATIONS, locationsTag);
@@ -84,11 +80,8 @@ public final class GlobalLocations extends SavedData {
         String dataKey = TPMod.MODID + Constants.SAVED_DATA_SUFFIX;
 
         return storage.computeIfAbsent(
-                new SavedData.Factory<>(
-                        GlobalLocations::new,
-                        GlobalLocations::load,
-                        DataFixTypes.LEVEL
-                ),
+                GlobalLocations::load,
+                GlobalLocations::new,
                 dataKey
         );
     }
